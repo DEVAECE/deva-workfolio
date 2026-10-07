@@ -1,0 +1,2 @@
+import { env } from 'cloudflare:workers';
+export async function GET(req:Request,{params}:{params:Promise<{key:string}>}){try{const {key}=await params;const o=await env.BUCKET!.get(key);if(!o)return new Response('File not found',{status:404});const h=new Headers();o.writeHttpMetadata(h);h.set('X-Content-Type-Options','nosniff');h.set('Content-Disposition','inline; filename="'+(o.customMetadata?.filename||'attachment').replace(/[^a-zA-Z0-9._ -]/g,'_')+'"');return new Response(o.body,{headers:h});}catch{return new Response('File unavailable',{status:503});}}
