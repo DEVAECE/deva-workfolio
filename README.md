@@ -1,6 +1,6 @@
 # Deva Workfolio — GitHub Pages edition
 
-A free-to-host static portfolio with Hey Buddy featured, source and download links, custom illustrations, and an export/import editor. Includes the complete original server-based source in `original-server-source/` for reference.
+A free-to-host static portfolio with Hey Buddy featured, source and download links, custom illustrations, and owner-controlled updates through GitHub. Includes the complete original server-based source in `original-server-source/` for reference.
 
 ## Publish without installing anything
 
@@ -27,22 +27,17 @@ Recommended if you plan to update the site regularly.
 
 The workflow installs locked dependencies, checks TypeScript, builds, and publishes `docs/`. It needs no API keys or external hosting account.
 
-## Add and edit projects
+## Add and edit projects — owner only
 
-- Select **Manage** on the website, or open `?manage=1`.
-- Edit your introduction or add/edit/delete projects.
-- Add GitHub repository links, download/release links, summaries, tags, images, videos, and documents.
-- Select **Apply project changes** to update the preview.
-- Select **Export portfolio.json** to download the complete updated collection.
-- **Automatic-build setup:** replace `public/portfolio.json` in the repository with the export, then commit. The workflow republishes it.
-- **Prebuilt /docs setup:** replace `docs/portfolio.json` with the export and commit. No rebuild is required for content changes.
-- To resume an unsaved editing session, import your exported JSON through **Manage**.
+The public website is read-only. It contains no Manage editor, upload forms, or write APIs. Opening `?manage=1` also displays only the public showcase.
 
-The editor does not write directly to GitHub. Its preview exists only in the current browser tab, and refresh discards unexported changes. Anyone can open an editor preview, but only people with repository write access can publish changes. There is no server-side login, database, or cloud-upload service in this edition.
+Sign in to your DEVAECE GitHub account and edit `public/portfolio.json` in this repository, then commit to `main`. The workflow automatically publishes the update. For the prebuilt setup, edit `docs/portfolio.json` instead. Add projects, summaries, source/download links and attachment URLs using the existing project as a template.
+
+Repository write access controls publishing. Keep repository collaborators restricted to yourself and do not share your GitHub credentials. Public visitors may view or fork the source, but cannot update this repository or website.
 
 ## Attachments
 
-- Embed supported images, MP4/WebM clips, PDFs, or text files up to 5 MB in the exported JSON.
+- Add image, video and document URLs to each project’s `assets` array in the JSON.
 - For larger files, upload them to GitHub Releases or another public host and attach a URL. YouTube video URLs can be embedded.
 - For efficient galleries, add files to `public/images/` and use a relative URL such as `images/my-project.webp`. Rebuild after adding files in the source setup; in the prebuilt setup, upload to `docs/images/` directly.
 - Document and resource links open in a separate tab. Download links point to the original GitHub release assets; installers are not stored in this portfolio.
@@ -76,7 +71,7 @@ The two robot illustrations were generated for this portfolio. They are conceptu
 
 ## Source layout
 
-- `src/Portfolio.tsx`: showcase and preview editor.
+- `src/Portfolio.tsx`: read-only public showcase.
 - `src/style.css`: desktop/mobile theme.
 - `src/main.tsx`: standalone React entry.
 - `src/project-data.ts`: initial featured-project data.
